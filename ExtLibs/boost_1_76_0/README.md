@@ -1,3 +1,6 @@
+# Credit
+This repo is a fork of [Boost.Compute 1.76.0](https://www.boost.org/)
+
 # Boost C++ Libraries
 
 The Boost project provides free peer-reviewed portable C++ source libraries.
