@@ -1,3 +1,6 @@
+# Credit
+This repo is a fork of [KhronosGroup/OpenCL-ICD-Loader](https://github.com/KhronosGroup/OpenCL-ICD-Loader)
+
 # OpenCL ICD Loader
 
 This repo contains the source code and tests for the Khronos official OpenCL ICD Loader.
