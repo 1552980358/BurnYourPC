@@ -1,3 +1,5 @@
 inc/EGL/
 inc/KHR/
 build/
+cmake-build-debug
+.idea/
