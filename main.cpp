@@ -31,15 +31,18 @@ int main() {
 }
 
 void init_welcome() {
-    compute::device device = compute::system::default_device();
+
     cout << "Welcome to " << BOLDRED << "BurnYourPC" << RESET << '!' << endl
          << "=====|Software|=====" << endl
          << "OS Name:  " << BOLDBLUE << get_os_name() << RESET << endl
          << "Compiler: " << BOLDBLUE << get_compiler() << RESET << endl
          << "=====|Hardware|=====" << endl
-         << "CPU:      " << BOLDBLUE << get_cpu_info() << RESET << endl
-         << "OpenCL:   " << BOLDBLUE << device.name() << RESET << " by " << BOLDRED << device.vendor() << RESET << " with " << BOLDYELLOW << device.version() << RESET << endl
-         << "====================" << endl
+         << "CPU:      " << BOLDBLUE << get_cpu_info() << RESET << endl;
+    auto devices = compute::system::devices();
+    for (auto &device : devices) {
+        cout << "OpenCL:   " << BOLDBLUE << device.name() << RESET << " by " << BOLDRED << device.vendor() << RESET << " with " << BOLDYELLOW << device.version() << RESET << endl;
+    }
+    cout << "====================" << endl
          << endl;
 }
 
