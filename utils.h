@@ -29,4 +29,6 @@ string get_os_name();
 
 string get_compiler();
 
+string get_cpu_info();
+
 #endif //BURNYOURPC_UTILS_H

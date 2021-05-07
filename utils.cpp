@@ -1,7 +1,9 @@
 #include <iostream>
 using std::cout;
 using std::to_string;
-#include <sstream>
+using std::getline;
+#include <cpuid.h>
+#include <cstring>
 #include "utils.h"
 
 void clear_screen() {
@@ -53,4 +55,32 @@ string get_compiler_version() {
 
 string get_compiler() {
     return get_compiler_name() + " " + get_compiler_version();
+}
+
+string get_cpu_info() {
+    char CPUBrandString[0x40];
+    unsigned int CPUInfo[4] = {0,0,0,0};
+
+    __cpuid(0x80000000, CPUInfo[0], CPUInfo[1], CPUInfo[2], CPUInfo[3]);
+    unsigned int nExIds = CPUInfo[0];
+
+    memset(CPUBrandString, 0, sizeof(CPUBrandString));
+
+    for (unsigned int i = 0x80000000; i <= nExIds; ++i) {
+        __cpuid(i, CPUInfo[0], CPUInfo[1], CPUInfo[2], CPUInfo[3]);
+        switch (i) {
+            case 0x80000002:
+                memcpy(CPUBrandString, CPUInfo, sizeof(CPUInfo));
+                break;
+            case 0x80000003:
+                memcpy(CPUBrandString + 16, CPUInfo, sizeof(CPUInfo));
+                break;
+            case 0x80000004:
+                memcpy(CPUBrandString + 32, CPUInfo, sizeof(CPUInfo));
+                break;
+            default:
+                break;
+        }
+    }
+    return CPUBrandString;
 }
