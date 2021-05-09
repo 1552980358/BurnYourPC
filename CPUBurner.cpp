@@ -42,8 +42,16 @@ void CPUBurner::menu() {
          << "= 2) Boolean loop" << endl
          << "= 3) FPU" << endl
          << "= 4) Double FPU" << endl
-         << "= 5) Register" << LINUX_TERMINAL_BOLDRED << " [BE CAUTIOUS]" << LINUX_TERMINAL_RESET << endl
-         << "===============================" << endl
+         << "= 5) Register";
+#ifdef WINDOWS_SYSTEM
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDRED);
+    cout << " [BE CAUTIOUS]" << endl;
+    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+#else
+    cout << LINUX_TERMINAL_BOLDRED << " [BE CAUTIOUS]" << LINUX_TERMINAL_RESET << endl;
+#endif
+    cout << "===============================" << endl
          << "$> ";
     string input;
     getline(cin, input);

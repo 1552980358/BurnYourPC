@@ -28,7 +28,53 @@ int main() {
     return 0;
 }
 
-void init_welcome() {
+void init_welcome_win() {
+
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    cout << "Welcome to ";
+    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDRED);
+    cout << "BurnYourPC";
+    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+    cout << '!' << endl
+         << "=====|Software|=====" << endl
+         << "OS Name:  ";
+    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDBLUE);
+    cout << get_os_name();
+    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+    cout << endl
+         << "Compiler: ";
+    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDBLUE);
+    cout << get_compiler();
+    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+    cout << endl
+         << "=====|Hardware|=====" << endl
+         << "CPU:      ";
+    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDBLUE);
+    cout << get_cpu_info();
+    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+    cout << endl;
+    auto devices = compute::system::devices();
+    for (auto &device : devices) {
+        cout << "OpenCL:   ";
+        SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDBLUE);
+        cout << device.name();
+        SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+        cout << " by ";
+        SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDRED);
+        cout << device.vendor();
+        SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+        cout << " with ";
+        SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDYELLOW);
+        cout << device.version();
+        SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+        cout << endl;
+    }
+    cout << "====================" << endl
+         << endl;
+}
+
+void init_welcome_linux() {
     cout << "Welcome to " << LINUX_TERMINAL_BOLDRED << "BurnYourPC" << LINUX_TERMINAL_RESET << '!' << endl
          << "=====|Software|=====" << endl
          << "OS Name:  " << LINUX_TERMINAL_BOLDBLUE << get_os_name() << LINUX_TERMINAL_RESET << endl
@@ -45,9 +91,30 @@ void init_welcome() {
          << endl;
 }
 
+void init_welcome() {
+#ifdef _WIN32
+    init_welcome_win();
+#elif _WIN64
+    init_welcome_win();
+#else
+    init_welcome_linux();
+#endif
+}
+
 Burner *menu() {
-    cout << LINUX_TERMINAL_BOLDCYAN << "- MAKE IT" << LINUX_TERMINAL_RESET << LINUX_TERMINAL_BOLDBLUE << " STRESSFUL" << LINUX_TERMINAL_RESET << LINUX_TERMINAL_BOLDCYAN << "-" << LINUX_TERMINAL_RESET << endl
-         << "==============================" << endl
+#ifdef WINDOWS_SYSTEM
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDCYAN);
+    cout << "- MAKE IT";
+    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDRED);
+    cout << " STRESSFUL";
+    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDCYAN);
+    cout << "-" << endl;
+    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+#else
+    cout << LINUX_TERMINAL_BOLDCYAN << "- MAKE IT" << LINUX_TERMINAL_RESET << LINUX_TERMINAL_BOLDBLUE << " STRESSFUL" << LINUX_TERMINAL_RESET << LINUX_TERMINAL_BOLDCYAN << "-" << LINUX_TERMINAL_RESET << endl;
+#endif
+    cout << "==============================" << endl
          << "= 1) CPU" << endl
          << "= 2) GPU (In developing)  " << endl
          << "= 3) RAM (In developing)" << endl

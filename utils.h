@@ -41,6 +41,16 @@ using std::string;
 #define WIN_CONSOLE_YELLOW 14
 #define WIN_CONSOLE_WHITE 15
 
+/** Check whether the OS is Microsoft Windows **/
+#ifdef _WIN32
+#define WINDOWS_SYSTEM
+#elif _WIN64
+#define WINDOWS_SYSTEM
+#endif
+#ifdef WINDOWS_SYSTEM
+#include <windows.h>
+#endif
+
 void clear_screen();
 
 string get_os_name();
