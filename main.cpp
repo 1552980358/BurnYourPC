@@ -13,6 +13,7 @@ namespace compute = boost::compute;
 
 #include "Burner.h"
 #include "CPUBurner.h"
+#include "GPUBurner.h"
 #include "utils.h"
 
 void init_welcome();
@@ -118,7 +119,7 @@ Burner *menu() {
 #endif
     cout << "==============================" << endl
          << "= 1) CPU" << endl
-         << "= 2) GPU (In developing)  " << endl
+         << "= 2) GPU" << endl
          << "= 3) RAM (In developing)" << endl
          << "= 4) Hard Disk (In developing)" << endl
          << "==============================" << endl
@@ -133,6 +134,8 @@ Burner *menu() {
         switch (input[0]) {
             case '1':
                 return new CPUBurner();
+            case '2':
+                return new GPUBurner(compute::system::default_device());
             default:
                 return nullptr;
         }
