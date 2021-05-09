@@ -6,9 +6,9 @@ using std::endl;
 #include <string>
 using std::string;
 using std::getline;
-#include <thread>
-using std::thread;
+#include <pthread.h>
 
+#include "mingw.thread.h"
 #include "CPUBurner.h"
 #include "utils.h"
 
@@ -54,7 +54,7 @@ void CPUBurner::menu() {
 }
 
 CPUBurner::CPUBurner() {
-    _cpu_max_thread = (int) thread::hardware_concurrency() - 1;
+    _cpu_max_thread = (int) std::thread::hardware_concurrency() - 1;
     _threads = (pthread_t *) malloc(_cpu_max_thread);
 }
 

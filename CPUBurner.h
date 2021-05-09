@@ -1,6 +1,7 @@
 #ifndef BURNYOURPC_CPUBURNER_H
 #define BURNYOURPC_CPUBURNER_H
 
+#include <pthread.h>
 #include "Burner.h"
 
 class CPUBurner: public Burner {
