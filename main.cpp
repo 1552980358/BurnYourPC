@@ -29,23 +29,24 @@ int main() {
 }
 
 void init_welcome() {
-
-    cout << "Welcome to " << BOLDRED << "BurnYourPC" << RESET << '!' << endl
+    cout << "Welcome to " << LINUX_TERMINAL_BOLDRED << "BurnYourPC" << LINUX_TERMINAL_RESET << '!' << endl
          << "=====|Software|=====" << endl
-         << "OS Name:  " << BOLDBLUE << get_os_name() << RESET << endl
-         << "Compiler: " << BOLDBLUE << get_compiler() << RESET << endl
+         << "OS Name:  " << LINUX_TERMINAL_BOLDBLUE << get_os_name() << LINUX_TERMINAL_RESET << endl
+         << "Compiler: " << LINUX_TERMINAL_BOLDBLUE << get_compiler() << LINUX_TERMINAL_RESET << endl
          << "=====|Hardware|=====" << endl
-         << "CPU:      " << BOLDBLUE << get_cpu_info() << RESET << endl;
+         << "CPU:      " << LINUX_TERMINAL_BOLDBLUE << get_cpu_info() << LINUX_TERMINAL_RESET << endl;
     auto devices = compute::system::devices();
     for (auto &device : devices) {
-        cout << "OpenCL:   " << BOLDBLUE << device.name() << RESET << " by " << BOLDRED << device.vendor() << RESET << " with " << BOLDYELLOW << device.version() << RESET << endl;
+        cout << "OpenCL:   " << LINUX_TERMINAL_BOLDBLUE << device.name() << LINUX_TERMINAL_RESET
+             << " by " << LINUX_TERMINAL_BOLDRED << device.vendor() << LINUX_TERMINAL_RESET
+             << " with " << LINUX_TERMINAL_BOLDYELLOW << device.version() << LINUX_TERMINAL_RESET << endl;
     }
     cout << "====================" << endl
          << endl;
 }
 
 Burner *menu() {
-    cout << BOLDCYAN << "- MAKE IT" << RESET << BOLDBLUE << " STRESSFUL" << RESET << BOLDCYAN << "-" << RESET << endl
+    cout << LINUX_TERMINAL_BOLDCYAN << "- MAKE IT" << LINUX_TERMINAL_RESET << LINUX_TERMINAL_BOLDBLUE << " STRESSFUL" << LINUX_TERMINAL_RESET << LINUX_TERMINAL_BOLDCYAN << "-" << LINUX_TERMINAL_RESET << endl
          << "==============================" << endl
          << "= 1) CPU" << endl
          << "= 2) GPU (In developing)  " << endl
