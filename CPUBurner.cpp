@@ -42,7 +42,7 @@ void CPUBurner::menu() {
          << "= 2) Boolean loop" << endl
          << "= 3) FPU" << endl
          << "= 4) Double FPU" << endl
-         << "= 5) Register" << BOLDRED << " [BE CAUTIOUS]" << RESET << endl
+         << "= 5) Register" << LINUX_TERMINAL_BOLDRED << " [BE CAUTIOUS]" << LINUX_TERMINAL_RESET << endl
          << "===============================" << endl
          << "$> ";
     string input;
