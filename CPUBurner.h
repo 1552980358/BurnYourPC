@@ -22,7 +22,7 @@ public:
 
     void prepare() override;
 
-    int get_type() const;
+    [[nodiscard]] int get_type() const;
 
 };
 
