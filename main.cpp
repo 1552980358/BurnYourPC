@@ -6,6 +6,8 @@ using std::endl;
 using std::string;
 using std::getline;
 
+#define CL_TARGET_OPENCL_VERSION 300
+
 #include <boost/compute.hpp>
 namespace compute = boost::compute;
 
