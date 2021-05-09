@@ -15,3 +15,7 @@
 3. [Boost.Compute 1.76.0](https://www.boost.org/)
    - Owner   : boostorg
    - License : [Boost Software License 1.0](https://github.com/boostorg/compute/blob/master/LICENSE_1_0.txt)
+
+4. [mingw-std-threads](https://github.com/meganz/mingw-std-threads)
+   - Owner   : Mega Limited
+   - License : [BSD 2-Clause "Simplified" License](https://github.com/meganz/mingw-std-threads/blob/master/LICENSE)
