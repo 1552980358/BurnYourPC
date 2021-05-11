@@ -44,26 +44,36 @@ void GPUBurner::prepare() {
     getchar();
 }
 
-struct pi_struct {
+struct pi_double_struct {
     double pi{};
 };
 
-auto make_pi_structs(int size) {
-    vector<pi_struct> structs(size);
+auto get_pi_double_structs(const int &size) {
+    vector<pi_double_struct> structs(size);
     std::generate(structs.begin(), structs.end(), []() {
-        return pi_struct{ 0 };
+        return pi_double_struct{ 0 };
     });
     return structs;
 }
 
-BOOST_COMPUTE_ADAPT_STRUCT(pi_struct, pi_struct, (pi));
+BOOST_COMPUTE_ADAPT_STRUCT(pi_double_struct, pi_double_struct, (pi));
 
-BOOST_COMPUTE_FUNCTION(double, get_pi, (pi_struct var_pi_struct), {
+BOOST_COMPUTE_FUNCTION(double, get_pi_double, (pi_double_struct var_pi_struct), {
             for (int i = 1; i < INT_MAX; ++i) {
                 var_pi_struct.pi += (double) ((i % 2) ? 1 : -1) * (1 / (2 * (double) i + 1));
             }
             return var_pi_struct.pi;
         });
+
+void cal_pi_double(boost::compute::context &context, boost::compute::command_queue &queue, const int compute_unit) {
+    vector<pi_double_struct> cpu_structs = get_pi_double_structs(compute_unit);
+    boost::compute::vector<pi_double_struct> gpu_structs(cpu_structs.size(), context);
+    boost::compute::copy(cpu_structs.begin(), cpu_structs.end(), gpu_structs.begin(), queue);
+    boost::compute::vector<double> gpu_pi(cpu_structs.size(), context);
+    boost::compute::transform(gpu_structs.begin(), gpu_structs.end(), gpu_pi.begin(), get_pi_double, queue);
+    vector<double> cpu_pi(gpu_pi.size());
+    boost::compute::copy(gpu_pi.begin(), gpu_pi.end(), cpu_pi.begin(), queue);
+}
 
 void GPUBurner::burn() {
 
@@ -74,13 +84,7 @@ void GPUBurner::burn() {
     boost::compute::context context(_device);
     boost::compute::command_queue queue(context, _device);
 
-    vector<pi_struct> cpu_structs = make_pi_structs(_compute_unit);
-    boost::compute::vector<pi_struct> gpu_structs(cpu_structs.size(), context);
-    boost::compute::copy(cpu_structs.begin(), cpu_structs.end(), gpu_structs.begin(), queue);
-    boost::compute::vector<double> gpu_pi(cpu_structs.size(), context);
-    boost::compute::transform(gpu_structs.begin(), gpu_structs.end(), gpu_pi.begin(), get_pi, queue);
-    vector<double> cpu_pi(gpu_pi.size());
-    boost::compute::copy(gpu_pi.begin(), gpu_pi.end(), cpu_pi.begin(), queue);
+    cal_pi_double(context, queue, (int) _device.compute_units());
 
 }
 
