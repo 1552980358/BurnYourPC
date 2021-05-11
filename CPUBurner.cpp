@@ -96,7 +96,9 @@ void burn_internal(CPUBurner *burner) {
             burn_internal_double_fpu();
         case CPU_BURN_TYPE_REGISTER:
             burn_internal_register();
+        case BURNER_TYPE_INIT:
         default:
+            cout << "Unknown burning method: " << burner->get_type() << endl;
             break;
     }
 }
