@@ -10,8 +10,6 @@ private:
     int _cpu_max_thread = 0;
     pthread_t *_threads = nullptr;
 
-    int _type = 0;
-
 public:
 
     CPUBurner();
@@ -21,8 +19,6 @@ public:
     void menu() override;
 
     void prepare() override;
-
-    [[nodiscard]] int get_type() const;
 
 };
 

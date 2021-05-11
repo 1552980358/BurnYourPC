@@ -78,10 +78,6 @@ void CPUBurner::burn() {
     burn_internal(this);
 }
 
-int CPUBurner::get_type() const {
-    return _type;
-}
-
 /** Internal function operating content **/
 void *pthread_burn(void *arg) {
     burn_internal((CPUBurner *) arg);
