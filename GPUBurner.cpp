@@ -17,7 +17,6 @@ using namespace std::chrono;
 
 GPUBurner::GPUBurner(const boost::compute::device& device) {
     _device = device;
-    _compute_unit = (int) device.compute_units();
 }
 
 void GPUBurner::menu() {

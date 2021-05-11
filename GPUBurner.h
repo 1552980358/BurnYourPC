@@ -14,8 +14,6 @@ private:
 
     boost::compute::device _device{};
 
-    int _compute_unit = 0;
-
     string _input{};
 
 public:
