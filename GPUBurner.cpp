@@ -8,6 +8,8 @@ using std::string;
 using std::getline;
 #include <vector>
 using std::vector;
+#include <chrono>
+using namespace std::chrono;
 
 #include <boost/compute.hpp>
 
@@ -84,7 +86,13 @@ void GPUBurner::burn() {
     boost::compute::context context(_device);
     boost::compute::command_queue queue(context, _device);
 
+    milliseconds milliseconds_start = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+
     cal_pi_double(context, queue, (int) _device.compute_units());
+
+    milliseconds milliseconds_stop = duration_cast< milliseconds >(system_clock::now().time_since_epoch());
+
+    cout << "Time spend: " << milliseconds_stop.count() - milliseconds_start.count() << " ms." << endl;
 
 }
 
