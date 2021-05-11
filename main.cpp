@@ -28,6 +28,10 @@ int main() {
     burner->menu();
     burner->prepare();
     burner->burn();
+
+    cout << "<Press any key to continue...>";
+    getchar();
+
     return 0;
 }
 
