@@ -8,7 +8,12 @@ using std::string;
 using std::getline;
 #include <pthread.h>
 
+#if defined(__MINGW32__ ) && !defined(_GLIBCXX_HAS_GTHREADS)
+#include <thread>
+#else
+#define MINGW_STDTHREAD_REDUNDANCY_WARNING
 #include "mingw.thread.h"
+#endif
 #include "CPUBurner.h"
 #include "utils.h"
 
