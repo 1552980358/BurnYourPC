@@ -14,5 +14,5 @@ include_directories("ExtLibs\\mingw-std-threads")
 link_directories("ExtLibs\\OpenCL-ICD-Loader\\out\\install\\x64-Debug\\bin")
 link_libraries(OpenCL.dll)
 
-add_executable(BurnYourPC main.cpp Burner.h Burner.cpp CPUBurner.cpp CPUBurner.h utils.cpp utils.h GPUBurner.cpp GPUBurner.h)
+add_executable(BurnYourPC main.cpp Burner.h Burner.cpp CPUBurner.cpp CPUBurner.h utils.cpp utils.h GPUBurner.cpp GPUBurner.h gpu_burner/GPUBurnerTask.cpp gpu_burner/GPUBurnerTask.h)
 target_link_libraries(BurnYourPC OpenCL.dll)
