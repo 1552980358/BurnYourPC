@@ -14,9 +14,10 @@ namespace compute = boost::compute;
 #include "CPUBurner.h"
 #include "GPUBurner.h"
 
-#ifdef WINDOWS_SYSTEM
-extern HANDLE windows_console_handle;
-#endif
+// Remove following 3 comment line if [multiple definition of "windows_console_handle"] error thrown
+// #ifdef WINDOWS_SYSTEM
+// extern HANDLE windows_console_handle; // NOLINT(readability-redundant-declaration)
+// #endif
 
 void init_welcome();
 Burner *menu();

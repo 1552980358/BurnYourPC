@@ -18,9 +18,10 @@ using std::getline;
 #include "utils.h"
 #include "CPUBurner.h"
 
-#ifdef WINDOWS_SYSTEM
-extern HANDLE windows_console_handle;
-#endif
+// Remove following 3 comment line if [multiple definition of "windows_console_handle"] error thrown
+// #ifdef WINDOWS_SYSTEM
+// extern HANDLE windows_console_handle; // NOLINT(readability-redundant-declaration)
+// #endif
 
 #define CPU_BURN_TYPE_EMPTY_LOOP 1
 #define CPU_BURN_TYPE_BOOL 2

@@ -50,7 +50,7 @@ using std::string;
 
 #ifdef WINDOWS_SYSTEM
 #include <windows.h>
-static HANDLE windows_console_handle = GetStdHandle(STD_OUTPUT_HANDLE);
+static HANDLE windows_console_handle = GetStdHandle(STD_OUTPUT_HANDLE); // NOLINT(cert-err58-cpp)
 #endif
 
 void clear_screen();

@@ -14,9 +14,11 @@ using namespace std::chrono;
 #include <boost/compute.hpp>
 
 #include "utils.h"
-#ifdef WINDOWS_SYSTEM
-extern HANDLE windows_console_handle;
-#endif
+
+// Remove following 3 comment line if [multiple definition of "windows_console_handle"] error thrown
+// #ifdef WINDOWS_SYSTEM
+// extern HANDLE windows_console_handle; // NOLINT(readability-redundant-declaration)
+// #endif
 
 GPUBurner::GPUBurner(const boost::compute::device& device) {
     _device = device;
