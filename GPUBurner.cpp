@@ -14,6 +14,9 @@ using namespace std::chrono;
 #include <boost/compute.hpp>
 
 #include "utils.h"
+#ifdef WINDOWS_SYSTEM
+extern HANDLE windows_console_handle;
+#endif
 
 GPUBurner::GPUBurner(const boost::compute::device& device) {
     _device = device;
@@ -21,17 +24,20 @@ GPUBurner::GPUBurner(const boost::compute::device& device) {
 
 void GPUBurner::menu() {
 #ifdef WINDOWS_SYSTEM
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDRED);
+    // HANDLE windows_console_handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_BOLDRED);
 #else
     cout << LINUX_TERMINAL_BOLDRED;
 #endif
+
     cout << "This test is still in development. Running will be DANGEROUS!" << endl;
+
 #ifdef WINDOWS_SYSTEM
-    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+    SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_RESET);
 #else
     cout << LINUX_TERMINAL_RESET;
 #endif
+
     cout << "Input \"YES\" to continue" << endl
          << "$> ";
     getline(cin, _input);

@@ -9,10 +9,14 @@ using std::getline;
 #include <boost/compute.hpp>
 namespace compute = boost::compute;
 
+#include "utils.h"
 #include "Burner.h"
 #include "CPUBurner.h"
 #include "GPUBurner.h"
-#include "utils.h"
+
+#ifdef WINDOWS_SYSTEM
+extern HANDLE windows_console_handle;
+#endif
 
 void init_welcome();
 Burner *menu();
@@ -34,45 +38,43 @@ int main() {
 }
 
 void init_welcome_win() {
-
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
+    // HANDLE windows_console_handle = GetStdHandle(STD_OUTPUT_HANDLE);
     cout << "Welcome to ";
-    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDRED);
+    SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_BOLDRED);
     cout << "BurnYourPC";
-    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+    SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_RESET);
     cout << '!' << endl
          << "=====|Software|=====" << endl
          << "OS Name:  ";
-    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDBLUE);
+    SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_BOLDBLUE);
     cout << get_os_name();
-    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+    SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_RESET);
     cout << endl
          << "Compiler: ";
-    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDBLUE);
+    SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_BOLDBLUE);
     cout << get_compiler();
-    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+    SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_RESET);
     cout << endl
          << "=====|Hardware|=====" << endl
          << "CPU:      ";
-    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDBLUE);
+    SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_BOLDBLUE);
     cout << get_cpu_info();
-    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+    SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_RESET);
     cout << endl;
     auto devices = compute::system::devices();
     for (auto &device : devices) {
         cout << "OpenCL:   ";
-        SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDBLUE);
+        SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_BOLDBLUE);
         cout << device.name();
-        SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+        SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_RESET);
         cout << " by ";
-        SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDRED);
+        SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_BOLDRED);
         cout << device.vendor();
-        SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+        SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_RESET);
         cout << " with ";
-        SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDYELLOW);
+        SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_BOLDYELLOW);
         cout << device.version();
-        SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+        SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_RESET);
         cout << endl;
     }
     cout << "====================" << endl
@@ -108,14 +110,14 @@ void init_welcome() {
 
 Burner *menu() {
 #ifdef WINDOWS_SYSTEM
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDCYAN);
+    // HANDLE windows_console_handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_BOLDCYAN);
     cout << "- MAKE IT";
-    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDRED);
+    SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_BOLDRED);
     cout << " STRESSFUL";
-    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDCYAN);
+    SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_BOLDCYAN);
     cout << "-" << endl;
-    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+    SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_RESET);
 #else
     cout << LINUX_TERMINAL_BOLDCYAN << "- MAKE IT" << LINUX_TERMINAL_RESET << LINUX_TERMINAL_BOLDBLUE << " STRESSFUL" << LINUX_TERMINAL_RESET << LINUX_TERMINAL_BOLDCYAN << "-" << LINUX_TERMINAL_RESET << endl;
 #endif

@@ -47,8 +47,10 @@ using std::string;
 #elif _WIN64
 #define WINDOWS_SYSTEM
 #endif
+
 #ifdef WINDOWS_SYSTEM
 #include <windows.h>
+static HANDLE windows_console_handle = GetStdHandle(STD_OUTPUT_HANDLE);
 #endif
 
 void clear_screen();

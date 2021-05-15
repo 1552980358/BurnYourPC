@@ -14,8 +14,13 @@ using std::getline;
 #define MINGW_STDTHREAD_REDUNDANCY_WARNING
 #include "mingw.thread.h"
 #endif
-#include "CPUBurner.h"
+
 #include "utils.h"
+#include "CPUBurner.h"
+
+#ifdef WINDOWS_SYSTEM
+extern HANDLE windows_console_handle;
+#endif
 
 #define CPU_BURN_TYPE_EMPTY_LOOP 1
 #define CPU_BURN_TYPE_BOOL 2
@@ -49,10 +54,10 @@ void CPUBurner::menu() {
          << "= 4) Double FPU" << endl
          << "= 5) Register";
 #ifdef WINDOWS_SYSTEM
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_BOLDRED);
+    // HANDLE windows_console_handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_BOLDRED);
     cout << " [BE CAUTIOUS]" << endl;
-    SetConsoleTextAttribute(hConsole, WIN_CONSOLE_RESET);
+    SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_RESET);
 #else
     cout << LINUX_TERMINAL_BOLDRED << " [BE CAUTIOUS]" << LINUX_TERMINAL_RESET << endl;
 #endif
