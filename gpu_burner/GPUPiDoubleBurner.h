@@ -7,6 +7,8 @@ class GPUPiDoubleBurner: public GPUBurnerTask {
 
 public:
 
+    explicit GPUPiDoubleBurner(compute::device &);
+
     void prepare() override;
 
     void burn() override;
