@@ -26,11 +26,13 @@ protected:
 
     void *_gpu_output = nullptr;
 
-    compute::command_queue queue{};
+    compute::command_queue *_queue = nullptr;
 
-    compute::context context{};
+    compute::context *_context = nullptr;
 
 public:
+
+    explicit GPUBurnerTask(compute::device &);
 
     virtual void prepare();
 
