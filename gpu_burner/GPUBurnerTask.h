@@ -10,11 +10,13 @@ namespace compute = boost::compute;
 
 class GPUBurnerTask {
 
-protected:
+private:
 
     milliseconds _start_milliseconds{};
 
     milliseconds _end_milliseconds{};
+
+protected:
 
     void *_cpu_input = nullptr;
 
