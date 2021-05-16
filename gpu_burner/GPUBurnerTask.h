@@ -38,6 +38,8 @@ public:
 
     virtual void recycle() = 0;
 
+    int get_time_spend_milliseconds();
+
 };
 
 
