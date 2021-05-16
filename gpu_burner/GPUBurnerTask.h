@@ -10,7 +10,7 @@ namespace compute = boost::compute;
 
 class GPUBurnerTask {
 
-private:
+protected:
 
     milliseconds _start_milliseconds{};
 
