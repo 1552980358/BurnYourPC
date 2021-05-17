@@ -3,6 +3,7 @@
 GPUBurnerTask::GPUBurnerTask(compute::device &device) {
     _context = new compute::context(device);
     _queue = new compute::command_queue(*_context, device);
+    _compute_unit = (int) device.compute_units();
 }
 
 void GPUBurnerTask::prepare() {

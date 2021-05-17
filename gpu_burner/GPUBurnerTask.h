@@ -30,6 +30,8 @@ protected:
 
     compute::context *_context = nullptr;
 
+    int _compute_unit{};
+
 public:
 
     explicit GPUBurnerTask(compute::device &);
