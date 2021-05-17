@@ -58,29 +58,29 @@ string get_compiler() {
 }
 
 string get_cpu_info() {
-    char CPUBrandString[0x40];
-    unsigned int CPUInfo[4] = {0,0,0,0};
+    char cpu_info_char_str[0x40];
+    unsigned int cpu_info[4] = {0, 0, 0, 0};
 
-    __cpuid(0x80000000, CPUInfo[0], CPUInfo[1], CPUInfo[2], CPUInfo[3]);
-    unsigned int nExIds = CPUInfo[0];
+    __cpuid(0x80000000, cpu_info[0], cpu_info[1], cpu_info[2], cpu_info[3]);
+    unsigned int nExIds = cpu_info[0];
 
-    memset(CPUBrandString, 0, sizeof(CPUBrandString));
+    memset(cpu_info_char_str, 0, sizeof(cpu_info_char_str));
 
     for (unsigned int i = 0x80000000; i <= nExIds; ++i) {
-        __cpuid(i, CPUInfo[0], CPUInfo[1], CPUInfo[2], CPUInfo[3]);
+        __cpuid(i, cpu_info[0], cpu_info[1], cpu_info[2], cpu_info[3]);
         switch (i) {
             case 0x80000002:
-                memcpy(CPUBrandString, CPUInfo, sizeof(CPUInfo));
+                memcpy(cpu_info_char_str, cpu_info, sizeof(cpu_info));
                 break;
             case 0x80000003:
-                memcpy(CPUBrandString + 16, CPUInfo, sizeof(CPUInfo));
+                memcpy(cpu_info_char_str + 16, cpu_info, sizeof(cpu_info));
                 break;
             case 0x80000004:
-                memcpy(CPUBrandString + 32, CPUInfo, sizeof(CPUInfo));
+                memcpy(cpu_info_char_str + 32, cpu_info, sizeof(cpu_info));
                 break;
             default:
                 break;
         }
     }
-    return CPUBrandString;
+    return cpu_info_char_str;
 }
