@@ -18,8 +18,6 @@ private:
 
 protected:
 
-    void *_cpu_input = nullptr;
-
     void *_gpu_input = nullptr;
 
     void *_cpu_output = nullptr;
