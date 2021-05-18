@@ -45,7 +45,11 @@ void GPUPiDoubleBurner::burn() {
 }
 
 void GPUPiDoubleBurner::recycle() {
-
+    delete (vector<pi_double_struct> *) _gpu_input;
+    delete (compute::vector<double> *) _gpu_output;
+    delete (vector<double> *) _cpu_output;
+    delete _context;
+    delete _queue;
 }
 
 vector<pi_double_struct> get_pi_double_structs(const int &size) {
