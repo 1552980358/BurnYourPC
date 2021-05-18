@@ -33,6 +33,7 @@ void GPUPiDoubleBurner::burn() {
             ((vector<pi_double_struct> *) _gpu_input)->begin(),
             ((vector<pi_double_struct> *) _gpu_input)->end(),
             ((compute::vector<double> *) _gpu_output)->begin(),
+            get_pi_double,
             *_queue
             );
     compute::copy(
