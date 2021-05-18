@@ -8,6 +8,15 @@ struct pi_double_struct {
     double pi{};
 };
 
+BOOST_COMPUTE_ADAPT_STRUCT(pi_double_struct, pi_double_struct, (pi));
+
+BOOST_COMPUTE_FUNCTION(double, get_pi_double, (pi_double_struct var_pi_struct), {
+    for (int i = 1; i < INT_MAX; ++i) {
+        var_pi_struct.pi += (double) ((i % 2) ? 1 : -1) * (1 / (2 * (double) i + 1));
+    }
+    return var_pi_struct.pi;
+});
+
 vector<pi_double_struct> get_pi_double_structs(const int &size);
 
 void GPUPiDoubleBurner::prepare() {
@@ -20,6 +29,18 @@ void GPUPiDoubleBurner::prepare() {
 }
 
 void GPUPiDoubleBurner::burn() {
+    compute::transform(
+            ((vector<pi_double_struct> *) _gpu_input)->begin(),
+            ((vector<pi_double_struct> *) _gpu_input)->end(),
+            ((compute::vector<double> *) _gpu_output)->begin(),
+            *_queue
+            );
+    compute::copy(
+            ((compute::vector<double> *) _gpu_output)->begin(),
+            ((compute::vector<double> *) _gpu_output)->end(),
+            ((vector<double> *) _cpu_output)->begin(),
+            *_queue
+            );
     GPUBurnerTask::burn();
 }
 
