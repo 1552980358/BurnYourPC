@@ -16,12 +16,11 @@ link_libraries(OpenCL.lib)
 
 add_executable(BurnYourPC
         main.cpp
-        Burner.h Burner.cpp
-        CPUBurner.h CPUBurner.cpp
-        utils.h utils.cpp
-        GPUBurner.h GPUBurner.cpp
-        gpu_burner/GPUBurnerTask.h
-        gpu_burner/GPUBurnerTask.cpp
+        Burner.cpp Burner.h
+        CPUBurner.cpp CPUBurner.h
+        utils.cpp utils.h
+        GPUBurner.cpp GPUBurner.h
+        gpu_burner/GPUBurnerTask.cpp gpu_burner/GPUBurnerTask.h
         gpu_burner/GPUPiDoubleBurner.cpp gpu_burner/GPUPiDoubleBurner.h
         )
 target_link_libraries(BurnYourPC OpenCL.lib)
