@@ -55,8 +55,7 @@ void GPUBurner::prepare() {
     if (!_input) {
         return;
     }
-    cout << "<Press any key to continue...>";
-    getchar();
+    Burner::prepare();
 }
 
 void GPUBurner::burn() {
