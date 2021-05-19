@@ -28,15 +28,8 @@ GPUBurner::GPUBurner(const boost::compute::device& device) {
 
 void GPUBurner::menu() {
     cout << "=|BURN-GPU|====================" << endl
-         << "= 1) Calculate Pi in Double Precision" << endl
-         << "===============================" << endl
-         << "$> ";
-    string input;
-    getline(cin, input);
-    if (input.empty()) {
-        return;
-    }
-    _type = input[0] - 48;
+         << "= 1) Calculate Pi in Double Precision" << endl;
+    Burner::menu();
 }
 
 void GPUBurner::prepare() {
