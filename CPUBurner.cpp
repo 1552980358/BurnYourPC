@@ -62,14 +62,7 @@ void CPUBurner::menu() {
 #else
     cout << LINUX_TERMINAL_BOLDRED << " [BE CAUTIOUS]" << LINUX_TERMINAL_RESET << endl;
 #endif
-    cout << "===============================" << endl
-         << "$> ";
-    string input;
-    getline(cin, input);
-    if (input.empty()) {
-        return;
-    }
-    _type = input[0] - 48;
+    Burner::menu();
 }
 
 CPUBurner::CPUBurner() {
