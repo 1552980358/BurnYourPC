@@ -71,8 +71,7 @@ CPUBurner::CPUBurner() {
 }
 
 void CPUBurner::prepare() {
-    cout << "<Press any key to start...> ";
-    getchar();
+    Burner::prepare();
 }
 
 void CPUBurner::burn() {
