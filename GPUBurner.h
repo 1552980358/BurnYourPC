@@ -14,7 +14,7 @@ private:
 
     boost::compute::device _device{};
 
-    string _input{};
+    bool _input = false;
 
 public:
 

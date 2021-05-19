@@ -39,14 +39,15 @@ void GPUBurner::menu() {
 #else
     cout << LINUX_TERMINAL_RESET;
 #endif
-
+    string input;
     cout << "Input \"YES\" to continue" << endl
          << "$> ";
-    getline(cin, _input);
+    getline(cin, input);
+    _input = input == "YES";
 }
 
 void GPUBurner::prepare() {
-    if (_input != "YES") {
+    if (!_input) {
         return;
     }
     cout << "<Press any key to continue...>";
@@ -54,12 +55,9 @@ void GPUBurner::prepare() {
 }
 
 void GPUBurner::burn() {
-
-    if (_input != "YES") {
+    if (!_input) {
         return;
     }
-
-
 }
 
 
