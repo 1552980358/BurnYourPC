@@ -47,6 +47,25 @@ void GPUBurner::menu() {
 }
 
 void GPUBurner::prepare() {
+#ifdef WINDOWS_SYSTEM
+    // HANDLE windows_console_handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_BOLDRED);
+#else
+    cout << LINUX_TERMINAL_BOLDRED;
+#endif
+
+    cout << "This test is still in development. Running will be DANGEROUS!" << endl;
+
+#ifdef WINDOWS_SYSTEM
+    SetConsoleTextAttribute(windows_console_handle, WIN_CONSOLE_RESET);
+#else
+    cout << LINUX_TERMINAL_RESET;
+#endif
+    string input;
+    cout << "Input \"YES\" to continue" << endl
+         << "$> ";
+    getline(cin, input);
+    _input = input == "YES";
     if (!_input) {
         return;
     }
