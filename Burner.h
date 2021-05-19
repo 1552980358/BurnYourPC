@@ -13,7 +13,7 @@ public:
 
     [[nodiscard]] int get_type() const;
 
-    virtual void menu() = 0;
+    virtual void menu();
 
     virtual void prepare() = 0;
 
