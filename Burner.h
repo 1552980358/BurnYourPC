@@ -15,7 +15,7 @@ public:
 
     virtual void menu();
 
-    virtual void prepare() = 0;
+    virtual void prepare();
 
     virtual void burn() = 0;
 

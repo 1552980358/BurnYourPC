@@ -17,6 +17,11 @@ void Burner::menu() {
     _type = input[0] - 48;
 }
 
+void Burner::prepare() {
+    cout << "<Press any key to continue...>";
+    getchar();
+}
+
 int Burner::get_type() const {
     return _type;
 }
