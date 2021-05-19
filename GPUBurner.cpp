@@ -14,6 +14,7 @@ using namespace std::chrono;
 #include <boost/compute.hpp>
 
 #include "utils.h"
+#include "gpu_burner/GPUPiDoubleBurner.h"
 
 #define GPU_BURN_TYPE_PI_DOUBLE 1
 
@@ -62,6 +63,29 @@ void GPUBurner::burn() {
     if (!_input) {
         return;
     }
+    GPUBurnerTask *burner_task = nullptr;
+    switch (_type) {
+        case GPU_BURN_TYPE_PI_DOUBLE:
+            burner_task = new GPUPiDoubleBurner(_device);
+            break;
+        case BURNER_TYPE_INIT:
+        default:
+            cout << "Unknown burning method: " << _type << endl;
+            return;
+    }
+    cout << "GPUBurner task preparing..." << endl;
+    burner_task->prepare();
+    cout << "Now start..." << endl;
+    burner_task->burn();
+    cout << "GPUBurner task complete." << endl
+         << "Time spend: " << burner_task->get_time_spend_milliseconds() << " ms." << endl;
+    burner_task->recycle();
+
+    switch (_type) {
+        case GPU_BURN_TYPE_PI_DOUBLE:
+            delete (GPUPiDoubleBurner *) burner_task;
+            break;
+    }
 }
 
-
+#undef GPU_BURN_TYPE_PI_DOUBLE
