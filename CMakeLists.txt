@@ -22,5 +22,6 @@ add_executable(BurnYourPC
         GPUBurner.cpp GPUBurner.h
         gpu_burner/GPUBurnerTask.cpp gpu_burner/GPUBurnerTask.h
         gpu_burner/GPUPiDoubleBurner.cpp gpu_burner/GPUPiDoubleBurner.h
+        gpu_burner/GPUPiFloatBurner.cpp gpu_burner/GPUPiFloatBurner.h
         )
 target_link_libraries(BurnYourPC OpenCL.lib)
