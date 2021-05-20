@@ -8,8 +8,6 @@ using std::string;
 using std::getline;
 #include <vector>
 using std::vector;
-#include <chrono>
-using namespace std::chrono;
 
 #include <boost/compute.hpp>
 
