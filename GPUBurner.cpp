@@ -59,7 +59,7 @@ void GPUBurner::burn() {
     if (!_input) {
         return;
     }
-    GPUBurnerTask *burner_task = nullptr;
+    GPUBurnerTask *burner_task;
     switch (_type) {
         case GPU_BURN_TYPE_PI_DOUBLE:
             burner_task = new GPUPiDoubleBurner(_device);
