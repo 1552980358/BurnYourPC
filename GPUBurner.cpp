@@ -11,8 +11,10 @@ using std::vector;
 
 #include "utils.h"
 #include "gpu_burner/GPUPiDoubleBurner.h"
+#include "gpu_burner/GPUPiFloatBurner.h"
 
 #define GPU_BURN_TYPE_PI_DOUBLE 1
+#define GPU_BURN_TYPE_PI_FLOAT 2
 
 // Remove following 3 comment line if [multiple definition of "windows_console_handle"] error thrown
 // #ifdef WINDOWS_SYSTEM
@@ -25,7 +27,8 @@ GPUBurner::GPUBurner(const boost::compute::device& device) {
 
 void GPUBurner::menu() {
     cout << "=|BURN-GPU|====================" << endl
-         << "= 1) Calculate Pi in Double Precision" << endl;
+         << "= 1) Calculate Pi in Double Precision" << endl
+         << "= 2) Calculate Pi in Single Precision" << endl;
     Burner::menu();
 }
 
@@ -64,6 +67,9 @@ void GPUBurner::burn() {
         case GPU_BURN_TYPE_PI_DOUBLE:
             burner_task = new GPUPiDoubleBurner(_device);
             break;
+        case GPU_BURN_TYPE_PI_FLOAT:
+            burner_task = new GPUPiFloatBurner(_device);
+            break;
         case BURNER_TYPE_INIT:
         default:
             cout << "Unknown burning method: " << _type << endl;
@@ -81,7 +87,11 @@ void GPUBurner::burn() {
         case GPU_BURN_TYPE_PI_DOUBLE:
             delete (GPUPiDoubleBurner *) burner_task;
             break;
+        case GPU_BURN_TYPE_PI_FLOAT:
+            delete (GPUPiFloatBurner *) burner_task;
+            break;
     }
 }
 
 #undef GPU_BURN_TYPE_PI_DOUBLE
+#undef GPU_BURN_TYPE_PI_FLOAT
