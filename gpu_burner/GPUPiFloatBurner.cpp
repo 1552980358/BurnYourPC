@@ -1,6 +1,4 @@
 #include "GPUPiFloatBurner.h"
-
-#include "GPUPiFloatBurner.h"
 #include <vector>
 using std::vector;
 
