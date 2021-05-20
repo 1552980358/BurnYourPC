@@ -9,8 +9,6 @@ using std::getline;
 #include <vector>
 using std::vector;
 
-#include <boost/compute.hpp>
-
 #include "utils.h"
 #include "gpu_burner/GPUPiDoubleBurner.h"
 
